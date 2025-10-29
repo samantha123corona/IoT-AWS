@@ -2,7 +2,7 @@
   "name": "iot-frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://TU_USUARIO.github.io/TU_REPO",
+  "homepage": "https://samantha123corona.github.io/IoT-AWS",
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
