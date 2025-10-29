@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/IoT-AWS/static/css/main.740785f9.css",
+    "main.js": "/IoT-AWS/static/js/main.6dc8b07b.js",
+    "index.html": "/IoT-AWS/index.html",
+    "main.740785f9.css.map": "/IoT-AWS/static/css/main.740785f9.css.map",
+    "main.6dc8b07b.js.map": "/IoT-AWS/static/js/main.6dc8b07b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.740785f9.css",
+    "static/js/main.6dc8b07b.js"
+  ]
+}
