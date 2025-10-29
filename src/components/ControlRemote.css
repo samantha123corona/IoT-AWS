@@ -1,0 +1,24 @@
+
+.control-remote { display:flex; flex-direction:column; align-items:center; }
+.dpad { position: relative; width: 220px; height: 220px; }
+.dpad-btn {
+  position: absolute;
+  background: #fff;
+  border: 2px solid #0d6efd;
+  border-radius: 12px;
+  font-size: 24px;
+  padding: 10px;
+  width: 70px; height: 70px;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+}
+.dpad-btn.up    { left: 75px; top: 8px; }
+.dpad-btn.down  { left: 75px; top: 140px; }
+.dpad-btn.left  { left: 8px; top: 75px; }
+.dpad-btn.right { left: 140px; top: 75px; }
+.dpad-btn.center {
+  left: 75px; top: 75px;
+  background: #0d6efd; color: white; font-weight:700;
+  width:70px; height:70px; border-radius: 50%;
+}
+.extras .btn { font-size: 0.9rem; }
