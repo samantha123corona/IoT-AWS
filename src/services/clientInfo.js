@@ -2,6 +2,7 @@ const CACHE_KEY = 'iot_client_info_v1';
 const CACHE_TTL_MS = 1000 * 60 * 30; // 30 minutos
 
 export async function getClientInfo() {
+
   try {
     const cached = JSON.parse(sessionStorage.getItem(CACHE_KEY) || 'null');
     if (cached && (Date.now() - cached._ts) < CACHE_TTL_MS) {
@@ -13,7 +14,7 @@ export async function getClientInfo() {
   let nombre = localStorage.getItem('iot_device_name');
   if (!nombre) {
     const base = navigator.platform || (navigator.userAgent.match(/\(([^)]+)\)/)?.[1] || 'Device');
-    nombre = `${base.replace(/\s+/g, '_').slice(0,20)}-${Math.floor(Math.random()*9000)+100}`;
+    nombre = `${base.replace(/\s+/g, '_').slice(0, 20)}-${Math.floor(Math.random() * 9000) + 100}`;
     localStorage.setItem('iot_device_name', nombre);
   }
 
@@ -47,6 +48,18 @@ export async function getClientInfo() {
   } catch (e) { /* ignore */ }
 
   const data = { ip, pais, ciudad, longitud, latitud, nombre_dispositivo: nombre };
-  try { sessionStorage.setItem(CACHE_KEY, JSON.stringify({ _ts: Date.now(), data })); } catch(e){}
+  try { sessionStorage.setItem(CACHE_KEY, JSON.stringify({ _ts: Date.now(), data })); } catch (e) { }
+
+  const dataLog = {
+    ip,
+    pais,
+    ciudad,
+    longitud: longitud ?? 0,  // <-- si falla, ponemos 0
+    latitud: latitud ?? 0,    // <-- si falla, ponemos 0
+    nombre_dispositivo: nombre
+  };
+
+  console.log("Client info final antes de enviar:", dataLog);
+
   return data;
 }

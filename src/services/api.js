@@ -1,27 +1,49 @@
-const API_URL = process.env.REACT_APP_API_URL || window.location.origin;
+const API_URL = process.env.REACT_APP_API_URL?.trim() || window.location.origin;
 
-export async function insertEvent(payload) {
-  const res = await fetch(`${API_URL}/api/events`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
+// Headers por defecto para todos los requests
+const defaultHeaders = {
+  'Content-Type': 'application/json',
+  'ngrok-skip-browser-warning': '1',
+};
+
+// Función genérica para hacer fetch y manejar errores
+async function apiFetch(path, options = {}) {
+  const res = await fetch(`${API_URL}${path}`, {
+    headers: defaultHeaders,
+    ...options,
   });
-  if (!res.ok) throw new Error(`API error ${res.status}`);
-  return res.json();
+
+  if (!res.ok) {
+    const errorText = await res.text();
+    throw new Error(`API error ${res.status}: ${errorText}`);
+  }
+
+  // Intentamos parsear JSON, si falla devolvemos el texto
+  try {
+    return await res.json();
+  } catch {
+    return await res.text();
+  }
 }
 
-export async function getLast10Movements(deviceId = null) {
-  const qs = deviceId ? `?device_id=${deviceId}` : '';
-  const res = await fetch(`${API_URL}/api/movements/last10${qs}`);
-  if (!res.ok) throw new Error(`API error ${res.status}`);
-  return res.json();
+// Funciones de tu API
+export async function insertEvent(payload) {
+  console.log("InsertEvent payload:", payload); // <--- LOG DE DEPURACIÓN
+  return apiFetch('/api/events', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  });
 }
 
-export async function getLast10Obstacles(deviceId = null) {
+
+export function getLast10Movements(deviceId = null) {
   const qs = deviceId ? `?device_id=${deviceId}` : '';
-  const res = await fetch(`${API_URL}/api/obstacles/last10${qs}`);
-  if (!res.ok) throw new Error(`API error ${res.status}`);
-  return res.json();
+  return apiFetch(`/api/movements/last10${qs}`);
+}
+
+export function getLast10Obstacles(deviceId = null) {
+  const qs = deviceId ? `?device_id=${deviceId}` : '';
+  return apiFetch(`/api/obstacles/last10${qs}`);
 }
 
 export { API_URL };

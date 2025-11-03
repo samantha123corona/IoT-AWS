@@ -66,10 +66,11 @@ function App() {
       if (socketRef.current) socketRef.current.disconnect();
       if (pollingTimer) clearInterval(pollingTimer);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [device.id]);
 
   async function handleSend({ movement_code = null, obstacle_code = null, demo_code = null }) {
+
     try {
       const client = await getClientInfo();
 
@@ -95,6 +96,9 @@ function App() {
 
       const last10 = await getLast10Movements(device.id);
       if (last10 && last10.data) setEvents(last10.data);
+      const datalog = await insertEvent(payload);
+      console.log("Respuesta API insertEvent:", datalog);
+
 
     } catch (err) {
       console.error('Error insertando evento', err);
