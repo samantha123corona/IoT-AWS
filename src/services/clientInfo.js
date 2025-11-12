@@ -1,8 +1,8 @@
+// src/services/clientInfo.js
 const CACHE_KEY = 'iot_client_info_v1';
 const CACHE_TTL_MS = 1000 * 60 * 30; // 30 minutos
 
 export async function getClientInfo() {
-
   try {
     const cached = JSON.parse(sessionStorage.getItem(CACHE_KEY) || 'null');
     if (cached && (Date.now() - cached._ts) < CACHE_TTL_MS) {
@@ -21,15 +21,17 @@ export async function getClientInfo() {
   let ip = null, pais = null, ciudad = null, latitud = null, longitud = null;
 
   try {
-    const r = await fetch('https://ipapi.co/json/');
+    const r = await fetch('https://ipwho.is/');
+
     if (r.ok) {
       const j = await r.json();
-      ip = j.ip || ip;
-      pais = j.country_name || j.country || pais;
-      ciudad = j.city || ciudad;
-      latitud = j.latitude ?? j.lat ?? latitud;
-      longitud = j.longitude ?? j.lon ?? longitud;
+      ip = j.ip;
+      pais = j.country || j.country_name;
+      ciudad = j.city;
+      latitud = j.latitude;
+      longitud = j.longitude;
     }
+
   } catch (err) {
     console.warn('ipapi failed', err);
   }
@@ -47,19 +49,16 @@ export async function getClientInfo() {
     });
   } catch (e) { /* ignore */ }
 
-  const data = { ip, pais, ciudad, longitud, latitud, nombre_dispositivo: nombre };
-  try { sessionStorage.setItem(CACHE_KEY, JSON.stringify({ _ts: Date.now(), data })); } catch (e) { }
+  const data = { 
+  ip: ip || "No disponible", 
+  pais: pais || "Desconocido", 
+  ciudad: ciudad || "Desconocido", 
+  longitud: longitud || 0, 
+  latitud: latitud || 0, 
+  nombre_dispositivo: nombre 
+};
 
-  const dataLog = {
-    ip,
-    pais,
-    ciudad,
-    longitud: longitud ?? 0,  // <-- si falla, ponemos 0
-    latitud: latitud ?? 0,    // <-- si falla, ponemos 0
-    nombre_dispositivo: nombre
-  };
+console.log("📡 Client info final antes de enviar:", data);
 
-  console.log("Client info final antes de enviar:", dataLog);
-
-  return data;
+return data;
 }

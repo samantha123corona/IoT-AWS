@@ -1,49 +1,119 @@
+// src/components/ControlRemote.js
 import React from 'react';
 import './ControlRemote.css';
 
-export default function ControlRemote({ onSend, device }) {
-  const send = (movement_code) => onSend({ movement_code });
+export default function ControlRemote({ onSend }) {
+
+  const sendMovement = async (movement_code) => {
+    try {
+      await onSend({ movement_code });
+    } catch (err) {
+      console.error("Error insertando evento:", err);
+      alert(`Error insertando evento: ${err.response?.data?.message || err.message}`);
+    }
+  };
 
   return (
     <div className="card mb-3">
-      <div className="card-header">Control remoto</div>
-      <div className="card-body">
-        <div className="mb-2">
-          <strong>Dispositivo:</strong> {device.nombre_dispositivo || 'Sin nombre'}{' '}
-          {device.id ? <span className="badge bg-primary">ID {device.id}</span> : null}
-        </div>
-
+      <div className="card-header bg-dark text-white">Control Remoto</div>
+      <div className="card-body text-center">
         <div className="control-remote">
-          <div className="dpad">
-            <button className="dpad-btn up" onClick={() => send(0)}>▲</button>
-            <button className="dpad-btn left" onClick={() => send(4)}>◀</button>
-            <button className="dpad-btn center" onClick={() => send(2)}>■</button>
-            <button className="dpad-btn right" onClick={() => send(3)}>▶</button>
-            <button className="dpad-btn down" onClick={() => send(1)}>▼</button>
+          
+          {/* Flecha ARRIBA - Adelante */}
+          <button 
+            className="control-btn up-btn"
+            onClick={() => sendMovement(0)}
+            title="Adelante"
+          >
+            <span className="btn-icon">▲</span>
+            <span className="btn-label">Adelante</span>
+          </button>
+
+          <div className="horizontal-controls">
+            {/* Flecha IZQUIERDA */}
+            <button 
+              className="control-btn left-btn"
+              onClick={() => sendMovement(4)}
+              title="Izquierda"
+            >
+              <span className="btn-icon">◀</span>
+              <span className="btn-label">Izquierda</span>
+            </button>
+
+            {/* CENTRO - FRENO (más grande y destacado) */}
+            <button 
+              className="control-btn center-btn stop-btn"
+              onClick={() => sendMovement(2)}
+              title="Frenar/Detener"
+            >
+              <span className="btn-icon">⏹</span>
+              <span className="btn-label">Frenar</span>
+            </button>
+
+            {/* Flecha DERECHA */}
+            <button 
+              className="control-btn right-btn"
+              onClick={() => sendMovement(3)}
+              title="Derecha"
+            >
+              <span className="btn-icon">▶</span>
+              <span className="btn-label">Derecha</span>
+            </button>
           </div>
 
-          <div className="extras mt-3">
-            <div className="row gx-2">
-              <div className="col">
-                <button className="btn btn-outline-secondary w-100" onClick={() => send(7)}>Giro 90° →</button>
-              </div>
-              <div className="col">
-                <button className="btn btn-outline-secondary w-100" onClick={() => send(8)}>Giro 90° ←</button>
+          {/* Flecha ABAJO - Reversa */}
+          <button 
+            className="control-btn down-btn"
+            onClick={() => sendMovement(1)}
+            title="Reversa"
+          >
+            <span className="btn-icon">▼</span>
+            <span className="btn-label">Reversa</span>
+          </button>
+
+          {/* Controles adicionales - GIROS */}
+          <div className="additional-controls">
+            <div className="control-group">
+              <h6>Giros Rápidos 90°</h6>
+              <div className="btn-group-horizontal">
+                <button 
+                  className="btn btn-outline-primary"
+                  onClick={() => sendMovement(8)}
+                  title="Giro 90° Izquierda"
+                >
+                  ↶ 90° Izq
+                </button>
+                <button 
+                  className="btn btn-outline-primary"
+                  onClick={() => sendMovement(7)}
+                  title="Giro 90° Derecha"
+                >
+                  90° Der ↷
+                </button>
               </div>
             </div>
-            <div className="row gx-2 mt-2">
-              <div className="col">
-                <button className="btn btn-outline-warning w-100" onClick={() => send(9)}>Giro 360° →</button>
-              </div>
-              <div className="col">
-                <button className="btn btn-outline-warning w-100" onClick={() => send(10)}>Giro 360° ←</button>
+
+            <div className="control-group">
+              <h6>Giros Complejos 360°</h6>
+              <div className="btn-group-horizontal">
+                <button 
+                  className="btn btn-outline-warning"
+                  onClick={() => sendMovement(10)}
+                  title="Giro 360° Izquierda"
+                >
+                  ↶ 360° Izq
+                </button>
+                <button 
+                  className="btn btn-outline-warning"
+                  onClick={() => sendMovement(9)}
+                  title="Giro 360° Derecha"
+                >
+                  360° Der ↷
+                </button>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="mt-3">
-          <small className="text-muted">Usa los botones para enviar comandos al dispositivo.</small>
         </div>
       </div>
     </div>

@@ -1,24 +1,159 @@
+/* src/components/ControlRemote.css */
+.control-remote {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
 
-.control-remote { display:flex; flex-direction:column; align-items:center; }
-.dpad { position: relative; width: 220px; height: 220px; }
-.dpad-btn {
-  position: absolute;
-  background: #fff;
-  border: 2px solid #0d6efd;
+/* Controles principales - Layout tipo cruz */
+.horizontal-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.control-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa;
+  border: 2px solid #dee2e6;
   border-radius: 12px;
+  padding: 12px 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 80px;
+  min-height: 80px;
+  font-weight: 500;
+}
+
+.control-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.control-btn:active {
+  transform: translateY(0);
+}
+
+.btn-icon {
   font-size: 24px;
-  padding: 10px;
-  width: 70px; height: 70px;
-  display:flex; align-items:center; justify-content:center;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+  margin-bottom: 4px;
 }
-.dpad-btn.up    { left: 75px; top: 8px; }
-.dpad-btn.down  { left: 75px; top: 140px; }
-.dpad-btn.left  { left: 8px; top: 75px; }
-.dpad-btn.right { left: 140px; top: 75px; }
-.dpad-btn.center {
-  left: 75px; top: 75px;
-  background: #0d6efd; color: white; font-weight:700;
-  width:70px; height:70px; border-radius: 50%;
+
+.btn-label {
+  font-size: 11px;
+  color: #6c757d;
 }
-.extras .btn { font-size: 0.9rem; }
+
+/* Botones direccionales específicos */
+.up-btn {
+  border-color: #28a745;
+  background-color: #f8fff9;
+}
+
+.up-btn:hover {
+  background-color: #e8f5e8;
+  border-color: #20c997;
+}
+
+.down-btn {
+  border-color: #dc3545;
+  background-color: #fff8f8;
+}
+
+.down-btn:hover {
+  background-color: #fde8e8;
+  border-color: #e55353;
+}
+
+.left-btn, .right-btn {
+  border-color: #ffc107;
+  background-color: #fffdf5;
+}
+
+.left-btn:hover, .right-btn:hover {
+  background-color: #fef9e7;
+  border-color: #ffd54f;
+}
+
+/* Botón de FRENO - Destacado */
+.stop-btn {
+  min-width: 100px;
+  min-height: 100px;
+  background-color: #dc3545;
+  color: white;
+  border-color: #c82333;
+  font-weight: bold;
+}
+
+.stop-btn:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+  color: white;
+}
+
+.stop-btn .btn-icon {
+  font-size: 28px;
+}
+
+.stop-btn .btn-label {
+  color: white;
+  font-weight: 600;
+}
+
+/* Controles adicionales */
+.additional-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.control-group {
+  text-align: center;
+}
+
+.control-group h6 {
+  margin-bottom: 8px;
+  color: #495057;
+  font-weight: 600;
+}
+
+.btn-group-horizontal {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.btn-group-horizontal .btn {
+  flex: 1;
+  max-width: 120px;
+  padding: 8px 12px;
+  font-size: 12px;
+  border-radius: 8px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .control-btn {
+    min-width: 70px;
+    min-height: 70px;
+  }
+  
+  .stop-btn {
+    min-width: 85px;
+    min-height: 85px;
+  }
+  
+  .btn-icon {
+    font-size: 20px;
+  }
+  
+  .btn-label {
+    font-size: 10px;
+  }
+}
