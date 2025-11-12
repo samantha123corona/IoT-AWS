@@ -92,7 +92,7 @@ function App() {
         if (row.device_id) setDevice((prev) => ({ ...prev, id: row.device_id }));
       }
 
-      alert("Evento enviado correctamente con geolocalización!");
+      console.log("Evento enviado correctamente con geolocalización!");
     } catch (err) {
       console.error("Error completo insertando evento", err);
       alert("Error insertando evento: " + (err.message || err));
