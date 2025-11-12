@@ -74,6 +74,25 @@ export default function ControlRemote({ onSend }) {
           {/* Controles adicionales - GIROS */}
           <div className="additional-controls">
             <div className="control-group">
+              <h6>Vueltas hacia atras</h6>
+              <div className="btn-group-horizontal">
+                <button 
+                  className="btn btn-outline-primary"
+                  onClick={() => sendMovement(6)}
+                  title="vuelta izq atras"
+                >
+                  ↶ Izq
+                </button>
+                <button 
+                  className="btn btn-outline-primary"
+                  onClick={() => sendMovement(5)}
+                  title="vuelta derecha atras "
+                >
+                  Der ↷
+                </button>
+              </div>
+            </div>
+            <div className="control-group">
               <h6>Giros Rápidos 90°</h6>
               <div className="btn-group-horizontal">
                 <button 
