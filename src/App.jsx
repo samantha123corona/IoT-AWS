@@ -195,12 +195,6 @@ function App() {
                   }))}
                 />
               </div>
-              <button
-                className="btn btn-secondary mt-2"
-                onClick={loadLast10Data}
-              >
-                🔄 Actualizar Datos
-              </button>
             </div>
           </div>
 
