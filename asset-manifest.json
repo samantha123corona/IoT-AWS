@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/IoT-AWS/static/css/main.c6f1aa52.css",
-    "main.js": "/IoT-AWS/static/js/main.3b846de7.js",
+    "main.js": "/IoT-AWS/static/js/main.60d85955.js",
     "index.html": "/IoT-AWS/index.html",
     "main.c6f1aa52.css.map": "/IoT-AWS/static/css/main.c6f1aa52.css.map",
-    "main.3b846de7.js.map": "/IoT-AWS/static/js/main.3b846de7.js.map"
+    "main.60d85955.js.map": "/IoT-AWS/static/js/main.60d85955.js.map"
   },
   "entrypoints": [
     "static/css/main.c6f1aa52.css",
-    "static/js/main.3b846de7.js"
+    "static/js/main.60d85955.js"
   ]
 }
