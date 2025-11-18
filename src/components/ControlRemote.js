@@ -2,7 +2,7 @@
 import React from 'react';
 import './ControlRemote.css';
 
-export default function ControlRemote({ onSend }) {
+export default function ControlRemote({ onSend, onSpeed }) {
 
   const sendMovement = async (movement_code) => {
     try {
@@ -13,14 +13,33 @@ export default function ControlRemote({ onSend }) {
     }
   };
 
+  const sendSpeed = async (velocidad) => {
+    try {
+      if (onSpeed) {
+        await onSpeed(velocidad);
+      }
+    } catch (err) {
+      console.error("Error enviando velocidad:", err);
+      alert(`Error enviando velocidad: ${err.message || err}`);
+    }
+  };
   return (
     <div className="card mb-3">
       <div className="card-header bg-dark text-white">Control Remoto</div>
       <div className="card-body text-center">
+        <div className="mt-3">
+          <h6>Velocidad</h6>
+          <div className="btn-group">
+            <button className="btn btn-success" onClick={() => sendSpeed(1)}>Baja</button>
+            <button className="btn btn-warning" onClick={() => sendSpeed(2)}>Media</button>
+            <button className="btn btn-danger" onClick={() => sendSpeed(3)}>Alta</button>
+          </div>
+        </div>
+        <br></br>
         <div className="control-remote">
-          
+
           {/* Flecha ARRIBA - Adelante */}
-          <button 
+          <button
             className="control-btn up-btn"
             onClick={() => sendMovement(0)}
             title="Adelante"
@@ -31,7 +50,7 @@ export default function ControlRemote({ onSend }) {
 
           <div className="horizontal-controls">
             {/* Flecha IZQUIERDA */}
-            <button 
+            <button
               className="control-btn left-btn"
               onClick={() => sendMovement(4)}
               title="Izquierda"
@@ -41,7 +60,7 @@ export default function ControlRemote({ onSend }) {
             </button>
 
             {/* CENTRO - FRENO (más grande y destacado) */}
-            <button 
+            <button
               className="control-btn center-btn stop-btn"
               onClick={() => sendMovement(2)}
               title="Frenar/Detener"
@@ -51,7 +70,7 @@ export default function ControlRemote({ onSend }) {
             </button>
 
             {/* Flecha DERECHA */}
-            <button 
+            <button
               className="control-btn right-btn"
               onClick={() => sendMovement(3)}
               title="Derecha"
@@ -62,7 +81,7 @@ export default function ControlRemote({ onSend }) {
           </div>
 
           {/* Flecha ABAJO - Reversa */}
-          <button 
+          <button
             className="control-btn down-btn"
             onClick={() => sendMovement(1)}
             title="Reversa"
@@ -76,14 +95,14 @@ export default function ControlRemote({ onSend }) {
             <div className="control-group">
               <h6>Vueltas hacia atras</h6>
               <div className="btn-group-horizontal">
-                <button 
+                <button
                   className="btn btn-outline-primary"
                   onClick={() => sendMovement(6)}
                   title="vuelta izq atras"
                 >
                   ↶ Izq
                 </button>
-                <button 
+                <button
                   className="btn btn-outline-primary"
                   onClick={() => sendMovement(5)}
                   title="vuelta derecha atras "
@@ -95,14 +114,14 @@ export default function ControlRemote({ onSend }) {
             <div className="control-group">
               <h6>Giros Rápidos 90°</h6>
               <div className="btn-group-horizontal">
-                <button 
+                <button
                   className="btn btn-outline-primary"
                   onClick={() => sendMovement(8)}
                   title="Giro 90° Izquierda"
                 >
                   ↶ 90° Izq
                 </button>
-                <button 
+                <button
                   className="btn btn-outline-primary"
                   onClick={() => sendMovement(7)}
                   title="Giro 90° Derecha"
@@ -115,14 +134,14 @@ export default function ControlRemote({ onSend }) {
             <div className="control-group">
               <h6>Giros Complejos 360°</h6>
               <div className="btn-group-horizontal">
-                <button 
+                <button
                   className="btn btn-outline-warning"
                   onClick={() => sendMovement(10)}
                   title="Giro 360° Izquierda"
                 >
                   ↶ 360° Izq
                 </button>
-                <button 
+                <button
                   className="btn btn-outline-warning"
                   onClick={() => sendMovement(9)}
                   title="Giro 360° Derecha"

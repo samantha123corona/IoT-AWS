@@ -40,3 +40,11 @@ export function getLast10Obstacles(deviceId = null) {
   // tu endpoint es /api/obstaculos/ultimos
   return apiFetch(`/api/obstaculos/ultimos${qs}`);
 }
+
+export function sendVelocidad(nivel) {
+  return apiFetch("/api/velocidad", {
+    method: "POST",
+    body: JSON.stringify({ nivel }), // ← aquí el nombre coincide con el backend
+  });
+}
+
