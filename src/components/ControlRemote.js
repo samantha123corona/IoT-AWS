@@ -35,6 +35,13 @@ export default function ControlRemote({ onSend, onSpeed }) {
             <button className="btn btn-danger" onClick={() => sendSpeed(3)}>Alta</button>
           </div>
         </div>
+        <div className="mt-3">
+          <div className="btn-group">
+            <button lassName="control-btn up-btn"
+            onClick={() => sendMovement(11)}
+            title="Adelante">DEMO</button>
+          </div>
+        </div>
         <br></br>
         <div className="control-remote">
 
@@ -52,7 +59,7 @@ export default function ControlRemote({ onSend, onSpeed }) {
             {/* Flecha IZQUIERDA */}
             <button
               className="control-btn left-btn"
-              onClick={() => sendMovement(4)}
+              onClick={() => sendMovement(8)}
               title="Izquierda"
             >
               <span className="btn-icon">◀</span>
@@ -116,7 +123,7 @@ export default function ControlRemote({ onSend, onSpeed }) {
               <div className="btn-group-horizontal">
                 <button
                   className="btn btn-outline-primary"
-                  onClick={() => sendMovement(8)}
+                  onClick={() => sendMovement(4)}
                   title="Giro 90° Izquierda"
                 >
                   ↶ 90° Izq
